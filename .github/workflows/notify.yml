@@ -1,0 +1,32 @@
+name: Telegram Travel Notifications
+
+on:
+  schedule:
+    # 每小時跑一次（UTC時間），腳本內部判斷是否該發送
+    # JST = UTC+9，所以：
+    # 21:00 JST = 12:00 UTC
+    # 05:00–10:00 JST = 20:00–01:00 UTC
+    - cron: '0 * * * *'
+  workflow_dispatch:  # 允許手動觸發測試
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests pytz
+
+      - name: Run notification script
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
+        run: python scripts/notify.py

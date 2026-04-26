@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>福岡行前Checklist</title>
+
+  <style>
+  :root {
+    --ink: #1a1208;
+    --paper: #f5f0e8;
+    --red: #c0392b;
+    --gold: #b8860b;
+    --muted: #7a6f5e;
+    --line: #d4c9b0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-sans); }
+  .wrap { padding: 1.5rem; }
+  .section { margin-bottom: 1.5rem; }
+  .section-header {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+  }
+  .section-title { font-size: 15px; font-weight: 500; color: var(--color-text-primary); }
+  .badge {
+    font-size: 11px; padding: 2px 8px;
+    border-radius: var(--border-radius-md);
+    font-weight: 500;
+  }
+  .badge-urgent { background: #FCEBEB; color: #A32D2D; }
+  .badge-book { background: #E6F1FB; color: #185FA5; }
+  .badge-buy { background: #EAF3DE; color: #3B6D11; }
+  .badge-prep { background: #FAEEDA; color: #854F0B; }
+
+  .item {
+    display: flex; align-items: flex-start; gap: 12px;
+    background-color: #6E1A37; color: #FFF8EC;
+    padding: 10px 12px;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    transition: background 0.15s;
+    border: 0.5px solid transparent;
+    margin-bottom: 4px;
+  }
+  .item:hover { background: var(--color-background-secondary); color: #021A54;}
+  .item.done { opacity: 0.45; }
+  .item.done .item-name { text-decoration: line-through; }
+
+  .checkbox {
+    width: 18px; height: 18px; border-radius: 4px;
+    border: 1.5px solid var(--gold);
+    flex-shrink: 0; margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+    background: var(--color-background-primary);
+  }
+  .item.done .checkbox {
+    background: var(--color-background-success);
+    border-color: var(--color-border-success);
+  }
+  .check-mark { display: none; font-size: 11px; color: var(--color-text-success); }
+  .item.done .check-mark { display: block; }
+
+  .item-content { flex: 1; min-width: 0; }
+  .item-name { font-size: 14px; color: var(--color-text-primary); line-height: 1.4; }
+  .item-detail { font-size: 12px; color: var(--color-text-secondary); margin-top: 2px; line-height: 1.5; }
+  .item-tag {
+    display: inline-block; margin-top: 4px;
+    font-size: 11px; padding: 1px 6px;
+    border-radius: var(--border-radius-md);
+    border: 0.5px solid var(--color-border-tertiary);
+    color: var(--color-text-secondary);
+  }
+
+  .progress-bar-wrap {
+    border-radius: 99px; height: 4px;
+    margin-bottom: 1.5rem; overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%; border-radius: 99px;
+    background: #6E1A37;
+    transition: width 0.3s ease;
+  }
+  .progress-label {
+    font-size: 20px; color: var(--color-text-secondary); font-weight: bold;
+    margin-bottom: 8px; display: flex; justify-content: space-between;
+  }
+
+  .link {
+    display: inline-block;
+    margin-top: 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    color: var(--red);
+    text-decoration: none;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--red);
+    padding-bottom: 1px;
+  }
+  .nav {margin-bottom: 2rem;}
+  </style>
+</head>
+<body>
+  
+  <div class="wrap">
+
+    <nav class="nav">
+      <a class="link" href="index.html">← 返回總覽</a>
+    </nav>
+
+    <div class="progress-label">
+      <span id="prog-text">0 / 0 完成</span>
+      <span id="prog-pct">0%</span>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar" id="prog-bar" style="width:0%"></div>
+    </div>
+
+    <div id="list"></div>
+  </div>
+
+  <script>
+  const SECTIONS = [
+    {
+      title: "出發前必買",
+      badge: "buy",
+      badge_text: "購買",
+      items: [
+        { name: "JR Okayama-Hiroshima-Yamaguchi Area Pass × 2張", detail: "Klook 或 JR-WEST 官網購買，5日券 ¥17,000/人\n啟用日：5/9", tag: "出發前在台買最方便" },
+        { name: "西鐵「旅人きっぷ」套票 × 2張", detail: "太宰府+柳川來回+川下り船票，5/12使用\n建議到福岡後在天神西鐵站購買", tag: "5/12 使用" },
+        { name: "日圓現金", detail: "建議換 NT$30,000/人，屋台和小店多為現金", tag: "出發前換好" },
+      ]
+    },
+    {
+      title: "出發前必訂（預約）",
+      badge: "book",
+      badge_text: "預約",
+      items: [
+        { name: "Hello Kitty展 門票", detail: "5/9 使用，前售票 ¥1,800 / 含周邊套票 ¥3,000\nrsk.co.jp/event/hellokittyexhibition", tag: "展期 3/19–5/10，倒數第二天！" },
+        { name: "若松屋 訂位（柳川鰻魚飯）", detail: "5/12 週二，建議提前電話訂位 13:00 左右\n📞 +81-944-72-3163", tag: "5/12 午餐" },
+        { name: "もつ鍋一藤 博多店 訂位", detail: "5/12 晚餐，建議提前訂位避免等候\ntabelog.com 搜尋「もつ鍋一藤博多」", tag: "5/12 晚餐" },
+      ]
+    },
+    {
+      title: "出發前建議準備",
+      badge: "prep",
+      badge_text: "準備",
+      items: [
+        { name: "確認 Telegram Channel 已加入", detail: "t.me/CapsPFukuoka2026Channel\n行程期間會自動推送提醒", tag: "推播通知" },
+        { name: "行程網頁加到手機書籤", detail: "doralu1023.github.io/caps-p-fukuoka-2026\n旅途中隨時查看", tag: "離線也能看" },
+        { name: "宮島纜車確認是否營運", detail: "miyajima-ropeway.info\n5/10 使用，偶有臨時停運", tag: "5/10 確認" },
+        { name: "下載福岡地鐵路線圖", detail: "subway.city.fukuoka.lg.jp\n市區移動主要靠地鐵+西鐵", tag: "離線備用" },
+      ]
+    },
+    {
+      title: "緊急提醒",
+      badge: "urgent",
+      badge_text: "注意",
+      items: [
+        { name: "Hello Kitty展 5/10 就結束！", detail: "5/9（週六）是倒數第二天，人潮多\n請 8:30 前到美術館門口排隊", tag: "⚡ 時間緊迫" },
+        { name: "若松屋 每月第1、3個週二公休", detail: "5/12 是第2個週二，可以去\n但仍建議提前確認並電話訂位", tag: "5/12 確認" },
+        { name: "Anago Meshi Ueno 可能提早賣完", detail: "宮島口名物穴子飯，17:00 前到最保險\n5/10 晚餐", tag: "5/10 注意" },
+        { name: "門司港→下關渡輪 JR Pass 不含", detail: "關門連絡船需補票約 ¥200/人\n5/11 使用", tag: "5/11 帶零錢" },
+      ]
+    }
+  ];
+
+  const badgeColors = {
+    urgent: 'badge-urgent',
+    book: 'badge-book',
+    buy: 'badge-buy',
+    prep: 'badge-prep'
+  };
+
+  const state = {};
+  let totalItems = 0;
+
+  function buildList() {
+    const listEl = document.getElementById('list');
+    SECTIONS.forEach((sec, si) => {
+      const secEl = document.createElement('div');
+      secEl.className = 'section';
+
+      const header = document.createElement('div');
+      header.className = 'section-header';
+      header.innerHTML = `
+        <span class="section-title">${sec.title}</span>
+        <span class="badge ${badgeColors[sec.badge]}">${sec.badge_text}</span>
+      `;
+      secEl.appendChild(header);
+
+      sec.items.forEach((item, ii) => {
+        const id = `${si}-${ii}`;
+        state[id] = false;
+        totalItems++;
+
+        const itemEl = document.createElement('div');
+        itemEl.className = 'item';
+        itemEl.dataset.id = id;
+        itemEl.innerHTML = `
+          <div class="checkbox"><span class="check-mark">✓</span></div>
+          <div class="item-content">
+            <div class="item-name">${item.name}</div>
+            <div class="item-detail">${item.detail.replace(/\n/g, '<br>')}</div>
+            <span class="item-tag">${item.tag}</span>
+          </div>
+        `;
+        itemEl.addEventListener('click', () => toggle(id, itemEl));
+        secEl.appendChild(itemEl);
+      });
+
+      listEl.appendChild(secEl);
+    });
+    updateProgress();
+  }
+
+  function toggle(id, el) {
+    state[id] = !state[id];
+    el.classList.toggle('done', state[id]);
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const done = Object.values(state).filter(Boolean).length;
+    const pct = Math.round(done / totalItems * 100);
+    document.getElementById('prog-text').textContent = `${done} / ${totalItems} 完成`;
+    document.getElementById('prog-pct').textContent = `${pct}%`;
+    document.getElementById('prog-bar').style.width = pct + '%';
+  }
+
+  buildList();
+  </script>
+
+</body>
+</html>

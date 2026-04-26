@@ -1,5 +1,4 @@
-
-  :root {
+:root {
     --ink: #1a1208;
     --paper: #f5f0e8;
     --red: #c0392b;
@@ -7,9 +6,9 @@
     --muted: #7a6f5e;
     --line: #d4c9b0;
   }
-
+ 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
+ 
   body {
     background: var(--paper);
     color: var(--ink);
@@ -18,7 +17,7 @@
     position: relative;
     overflow-x: hidden;
   }
-
+ 
   body::before {
     content: '';
     position: fixed;
@@ -29,7 +28,7 @@
     pointer-events: none;
     z-index: 0;
   }
-
+ 
   .wrapper {
     max-width: 860px;
     margin: 0 auto;
@@ -37,7 +36,7 @@
     position: relative;
     z-index: 1;
   }
-
+ 
   /* Header */
   header {
     text-align: center;
@@ -46,20 +45,20 @@
     border-bottom: 2px solid var(--ink);
     position: relative;
   }
-
+ 
   .stamp {
     display: inline-block;
     border: 3px solid var(--red);
     color: var(--red);
     font-family: 'DM Mono', monospace;
-    font-size: 11px;
+    font-size: 14px;
     letter-spacing: 3px;
     padding: 4px 12px;
     transform: rotate(-2deg);
     margin-bottom: 20px;
     opacity: 0.85;
   }
-
+ 
   h1 {
     font-family: 'Shippori Mincho', serif;
     font-size: clamp(2rem, 5vw, 3.2rem);
@@ -68,14 +67,14 @@
     line-height: 1.2;
     margin-bottom: 12px;
   }
-
+ 
   .subtitle {
     font-family: 'DM Mono', monospace;
-    font-size: 13px;
+    font-size: 14px;
     color: var(--muted);
     letter-spacing: 2px;
   }
-
+ 
   /* Flight Info */
   .flight-bar {
     display: grid;
@@ -88,7 +87,7 @@
     margin-bottom: 56px;
     position: relative;
   }
-
+ 
   .flight-bar::before {
     content: '✈';
     position: absolute;
@@ -105,28 +104,28 @@
     font-size: 14px;
     border-radius: 50%;
   }
-
-  .flight-info { font-size: 13px; }
+ 
+  .flight-info { font-size: 14px; }
   .flight-info .route {
     font-family: 'DM Mono', monospace;
     font-size: 18px;
     font-weight: 500;
     margin-bottom: 4px;
   }
-  .flight-info .detail { color: #b0a898; font-size: 12px; letter-spacing: 1px; }
+  .flight-info .detail { color: #b0a898; font-size: 14px; letter-spacing: 1px; }
   .flight-divider {
     font-family: 'DM Mono', monospace;
-    font-size: 11px;
+    font-size: 14px;
     color: var(--gold);
     text-align: center;
     letter-spacing: 1px;
   }
   .flight-info:last-child { text-align: right; }
-
+ 
   /* Section label */
   .section-label {
     font-family: 'DM Mono', monospace;
-    font-size: 11px;
+    font-size: 14px;
     letter-spacing: 4px;
     color: var(--muted);
     text-transform: uppercase;
@@ -141,14 +140,14 @@
     height: 1px;
     background: var(--line);
   }
-
+ 
   /* Day Cards */
   .days-grid {
     display: flex;
     flex-direction: column;
     gap: 0;
   }
-
+ 
   .day-card {
     display: grid;
     grid-template-columns: 80px 1fr;
@@ -160,9 +159,9 @@
     position: relative;
     overflow: hidden;
   }
-
+ 
   .day-card:last-child { border-bottom: 1px solid var(--line); }
-
+ 
   .day-card::after {
     content: '';
     position: absolute;
@@ -174,11 +173,11 @@
     transition: width 0.25s ease;
     z-index: 0;
   }
-
+ 
   .day-card:hover::after { width: 80px; }
   .day-card:hover .day-number { color: var(--paper); }
   .day-card:hover .day-content { background: #faf7f2; }
-
+ 
   .day-number {
     display: flex;
     flex-direction: column;
@@ -190,7 +189,7 @@
     z-index: 1;
     transition: color 0.25s ease;
   }
-
+ 
   .day-num-big {
     font-family: 'Shippori Mincho', serif;
     font-size: 28px;
@@ -199,12 +198,12 @@
   }
   .day-num-label {
     font-family: 'DM Mono', monospace;
-    font-size: 9px;
+    font-size: 14px;
     letter-spacing: 2px;
     color: var(--muted);
     margin-top: 4px;
   }
-
+ 
   .day-content {
     padding: 20px 24px;
     transition: background 0.25s ease;
@@ -212,7 +211,7 @@
     flex-direction: column;
     gap: 6px;
   }
-
+ 
   .day-meta {
     display: flex;
     align-items: center;
@@ -221,13 +220,13 @@
   }
   .day-date {
     font-family: 'DM Mono', monospace;
-    font-size: 11px;
+    font-size: 14px;
     color: var(--muted);
     letter-spacing: 1px;
   }
   .day-badge {
     font-family: 'DM Mono', monospace;
-    font-size: 9px;
+    font-size: 14px;
     padding: 2px 7px;
     letter-spacing: 2px;
   }
@@ -235,21 +234,21 @@
   .badge-private { background: var(--muted); color: white; }
   .badge-arrival { background: var(--gold); color: white; }
   .badge-departure { background: var(--red); color: white; }
-
+ 
   .day-title {
     font-family: 'Shippori Mincho', serif;
     font-size: 18px;
     font-weight: 600;
     letter-spacing: 0.05em;
   }
-
+ 
   .day-stops {
     font-family: 'DM Mono', monospace;
-    font-size: 11px;
+    font-size: 14px;
     color: var(--muted);
     letter-spacing: 0.5px;
   }
-
+ 
   .day-arrow {
     margin-left: auto;
     font-size: 18px;
@@ -259,7 +258,7 @@
     transition: transform 0.2s;
   }
   .day-card:hover .day-arrow { transform: translateX(4px); }
-
+ 
   /* Hotel Info */
   .hotel-block {
     margin-top: 56px;
@@ -267,7 +266,7 @@
     border: 1px solid var(--line);
     position: relative;
   }
-
+ 
   .hotel-block::before {
     content: '宿泊';
     position: absolute;
@@ -276,38 +275,38 @@
     background: var(--paper);
     padding: 0 8px;
     font-family: 'DM Mono', monospace;
-    font-size: 10px;
+    font-size: 14px;
     letter-spacing: 3px;
     color: var(--muted);
   }
-
+ 
   .hotel-name {
     font-family: 'Shippori Mincho', serif;
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 8px;
   }
-
+ 
   .hotel-detail {
     font-family: 'DM Mono', monospace;
-    font-size: 12px;
+    font-size: 14px;
     color: var(--muted);
     letter-spacing: 1px;
     line-height: 1.8;
   }
-
+ 
   .hotel-link {
     display: inline-block;
     margin-top: 12px;
     font-family: 'DM Mono', monospace;
-    font-size: 11px;
+    font-size: 14px;
     color: var(--red);
     text-decoration: none;
     letter-spacing: 1px;
     border-bottom: 1px solid var(--red);
     padding-bottom: 1px;
   }
-
+ 
   /* Pass Info */
   .pass-block {
     margin-top: 24px;
@@ -316,7 +315,7 @@
     border-left: 4px solid #1a5276;
     position: relative;
   }
-
+ 
   .pass-title {
     font-family: 'Shippori Mincho', serif;
     font-size: 16px;
@@ -324,15 +323,15 @@
     margin-bottom: 6px;
     color: #1a5276;
   }
-
+ 
   .pass-detail {
     font-family: 'DM Mono', monospace;
-    font-size: 11px;
+    font-size: 14px;
     color: var(--muted);
     letter-spacing: 1px;
     line-height: 2;
   }
-
+ 
   /* Footer */
   footer {
     margin-top: 64px;
@@ -340,17 +339,17 @@
     border-top: 1px solid var(--line);
     text-align: center;
     font-family: 'DM Mono', monospace;
-    font-size: 11px;
+    font-size: 14px;
     color: var(--muted);
     letter-spacing: 2px;
   }
-
+ 
   /* Animations */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(16px); }
     to { opacity: 1; transform: translateY(0); }
   }
-
+ 
   .wrapper > * {
     animation: fadeUp 0.5s ease both;
   }

@@ -29,4 +29,5 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
+          TEST_MODE: ${{ github.event_name == 'workflow_dispatch' && '1' || '0' }}
         run: python scripts/notify.py

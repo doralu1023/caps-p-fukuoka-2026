@@ -141,6 +141,17 @@ def send_message(text: str):
 
 
 def main():
+    # TEST MODE：設定環境變數 TEST_MODE=1 時，直接發一條測試訊息
+    if os.environ.get("TEST_MODE") == "1":
+        send_message(
+            "✅ *推播測試成功！*\n\n"
+            "🇯🇵 福岡旅行 2026 Telegram Bot 運作正常\n"
+            "📅 行程期間將自動推送提醒\n\n"
+            "• 每晚 21:00 → 隔天行程預告\n"
+            "• 出發前1小時 → 出發提醒"
+        )
+        return
+
     now = datetime.now(JST)
     today_str = now.strftime("%Y-%m-%d")
     hour = now.hour
